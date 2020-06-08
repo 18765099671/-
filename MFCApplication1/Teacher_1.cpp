@@ -58,14 +58,23 @@ void Teacher_1::OnBnClickedOk()
 	/*ifstream in("account_s.txt");
 	in >> tnum;
 	in >> tpassword;*/
-	int iRet;
+	char n = 'a';
+	int a1 = send(sock, &n, strlen(&n), 0);
+	int a2 = send(sock, num, strlen(num), 0);
+	int a3 = send(sock, password, strlen(password), 0);
+	char resbuf[2] = {};
+	int a4 = recv(sock, resbuf, 2, 0);
+	cout << a1 << "  " << a2 << "  " << a3 << "  " << a4;
+	int res;
+	res = (int)resbuf;
+	/*int iRet;
 	send(sock, num, strlen(num), 0);
-	send(sock, password, strlen(password), 0);
+	send(sock, password, strlen(password), 0);*/
 
-	char resbuf[5] = {};
-	iRet = recv(sock, resbuf, 5, 0);
+	/*char resbuf[5] = {};
+	iRet = recv(sock, resbuf, 5, 0);*/
 
-	if (resbuf[0] != '-1') {
+	if (res != -1) {
 		//页面跳转
 		strEDIT3 = "登录成功！";
 		SetDlgItemText(IDC_STATIC, strEDIT3);

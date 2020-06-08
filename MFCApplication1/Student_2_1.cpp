@@ -57,6 +57,8 @@ void Student_2_1::OnBnClickedButton2()
 	CString strEDIT1, strEDIT2, strEDIT3;
 	GetDlgItem(Name)->GetWindowText(strEDIT1);
 	char* name = (LPSTR)(LPCTSTR)strEDIT1;
+	char n = 1;
+	int a1 = send(sock, &n, strlen(&n), 0);
 	send(sock, name, strlen(name), 0);
 	char number[10] = {};
 	char nam[10] = {};

@@ -29,6 +29,7 @@ void Student_1::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(Student_1, CDialog)
 	ON_BN_CLICKED(IDOK, &Student_1::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &Student_1::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
 
@@ -50,19 +51,16 @@ void Student_1::OnBnClickedOk()
 	
 	char *num = (LPSTR)(LPCTSTR)strEDIT1;
 	char *password = (LPSTR)(LPCTSTR)strEDIT2;
-	char n[5] ;
-	/*long long tnum;
-	int tpassword;*/
-	/*ifstream in("account_s.txt");
-	in >> tnum;
-	in >> tpassword;*/
-	n[0] = 1;
-	if (send(sock, n, strlen(n), 0) == -1) exit(0);
-	if (send(sock, num, strlen(num), 0) == -1) exit(0);
-	if(send(sock, password, strlen(password), 0)==-1) exit(0);
-	char resbuf[5] = {};
+	char n='a';
+	int a1=send(sock, &n, strlen(&n), 0);
+	int a2 = send(sock, num, strlen(num), 0) ;
+	int a3 = send(sock, password, strlen(password), 0);
+	char resbuf[2] = {};
+	int a4 = recv(sock, resbuf, 2, 0) ;
+	cout << a1 << "  " <<a2 << "  " << a3 << "  " << a4;
+	
 
-	if (recv(sock, resbuf, 5, 0)==-1) exit(0);
+	
 	int res;
 	 res = (int)resbuf;
 	
@@ -87,4 +85,11 @@ void Student_1::OnBnClickedOk()
 	}
 	// TODO: 在此添加控件通知处理程序代码
 	
+}
+
+
+void Student_1::OnBnClickedCancel()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	CDialog::OnCancel();
 }

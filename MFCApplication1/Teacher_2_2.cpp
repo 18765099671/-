@@ -54,6 +54,8 @@ void Teacher_2_2::OnBnClickedOk()
 	char* s_time = (LPSTR)(LPCTSTR)strEDIT1;
 	char* e_time = (LPSTR)(LPCTSTR)strEDIT1;
 	char* reason = (LPSTR)(LPCTSTR)strEDIT1;
+	char n = 7;
+	int a1 = send(sock, &n, strlen(&n), 0);
 	send(sock, name, strlen(name), 0);
 	send(sock, type, strlen(name), 0);
 	send(sock, s_time, strlen(name), 0);
