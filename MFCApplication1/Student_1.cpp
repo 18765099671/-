@@ -52,20 +52,23 @@ void Student_1::OnBnClickedOk()
 	char *num = (LPSTR)(LPCTSTR)strEDIT1;
 	char *password = (LPSTR)(LPCTSTR)strEDIT2;
 	char n='a';
-	int a1=send(sock, &n, strlen(&n), 0);
-	int a2 = send(sock, num, strlen(num), 0) ;
-	int a3 = send(sock, password, strlen(password), 0);
-	char resbuf[2] = {};
-	int a4 = recv(sock, resbuf, 2, 0) ;
-	cout << a1 << "  " <<a2 << "  " << a3 << "  " << a4;
+	int a1=send(sock, &n, sizeof(n), 0);
+	int a2 = send(sock, num, 2, 0) ;
+	//cout << strlen(num) << endl;
+	int a3 = send(sock, password, 6, 0);
+	//cout << strlen(password) << endl;
+	cout << a1 << "  " << a2 << "  " << a3 << endl;
+	char resbuf = { };
+	int a4 = recv(sock, &resbuf, 1, 0) ;
+	cout << a4<<endl;
 	
 
 	
-	int res;
-	 res = (int)resbuf;
+	/*int res;
+	 res = (int)resbuf;*/
 	
 
-	if (res!=-1) {
+	if (resbuf !='n') {
 		//页面跳转
 		strEDIT3 = "登录成功！";
 		SetDlgItemText(IDC_STATIC, strEDIT3);

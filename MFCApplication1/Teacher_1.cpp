@@ -45,7 +45,7 @@ using namespace std;
 void Teacher_1::OnBnClickedOk()
 {
 	CString strEDIT1, strEDIT2, strEDIT3;
-	Socket_create();
+	sock=Socket_create();
 	SetDlgItemText(IDC_STATIC, strEDIT3);
 	GetDlgItem(ACCOUNT)->GetWindowText(strEDIT1);
 	GetDlgItem(PASSWORD)->GetWindowText(strEDIT2);
@@ -62,11 +62,11 @@ void Teacher_1::OnBnClickedOk()
 	int a1 = send(sock, &n, strlen(&n), 0);
 	int a2 = send(sock, num, strlen(num), 0);
 	int a3 = send(sock, password, strlen(password), 0);
-	char resbuf[2] = {};
-	int a4 = recv(sock, resbuf, 2, 0);
+	char resbuf;
+	int a4 = recv(sock, &resbuf, 1, 0);
 	cout << a1 << "  " << a2 << "  " << a3 << "  " << a4;
-	int res;
-	res = (int)resbuf;
+	/*int res;
+	res = (int)resbuf;*/
 	/*int iRet;
 	send(sock, num, strlen(num), 0);
 	send(sock, password, strlen(password), 0);*/
@@ -74,7 +74,7 @@ void Teacher_1::OnBnClickedOk()
 	/*char resbuf[5] = {};
 	iRet = recv(sock, resbuf, 5, 0);*/
 
-	if (res != -1) {
+	if (resbuf !=n ) {
 		//页面跳转
 		strEDIT3 = "登录成功！";
 		SetDlgItemText(IDC_STATIC, strEDIT3);
