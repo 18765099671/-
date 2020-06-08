@@ -72,7 +72,7 @@ void Student_1::OnBnClickedOk()
 		SetDlgItemText(IDC_STATIC, strEDIT3);
 
 		CDialog::OnOK();
-		//CDialogEx::OnOK();
+		//CDialogEx::OnOK();hgg
 		Student_2 Dlg3;           // 模态构造对话框类CTipDlg的实例   
 		Dlg3.DoModal();
 	}
