@@ -73,6 +73,18 @@ SOCKET Socket_create() {
 	
 	
 }
+string _UnicodeToUtf8(CString Unicodestr)
+{
+	wchar_t* unicode = Unicodestr.AllocSysString();
+	int len;
+	len = WideCharToMultiByte(CP_UTF8, 0, unicode, -1, NULL, 0, NULL, NULL);
+	char* szUtf8 = (char*)malloc(len + 1);
+	memset(szUtf8, 0, len + 1);
+	WideCharToMultiByte(CP_UTF8, 0, unicode, -1, szUtf8, len, NULL, NULL);
+	string result = szUtf8;
+	free(szUtf8);
+	return result;
+}
 BOOL CMFCApplication1App::InitInstance()
 {
 	

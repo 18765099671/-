@@ -41,40 +41,58 @@ END_MESSAGE_MAP()
 #include <windows.h>
 SOCKET sock;
 using namespace std;
+//void del( char* start,char* end,int len) {
+//	int j = 0;
+//	for (int i = 0; i < 2*len; i++)
+//	{
+//		if (start[i] != ' ') {
+//			end[j] = start[i]; j++;
+//		}
+//	}
+//
+//}
 void Student_1::OnBnClickedOk()
 {
 	CString strEDIT1, strEDIT2, strEDIT3;
 	sock=Socket_create();
-	SetDlgItemText(IDC_STATIC, strEDIT3);
+	//SetDlgItemText(IDC_STATIC, strEDIT3);
 	GetDlgItem(ACCOUNT)->GetWindowText(strEDIT1);
 	GetDlgItem(PASSWORD)->GetWindowText(strEDIT2);
-	
-	char *num = (LPSTR)(LPCTSTR)strEDIT1;
-	char *password = (LPSTR)(LPCTSTR)strEDIT2;
+	string numm=_UnicodeToUtf8(strEDIT1);
+	string passs = _UnicodeToUtf8(strEDIT2);
+	char first=numm.length();
+	char second=passs.length();
+	const char*  num = numm.c_str();
+	const char* password = passs.c_str();
+	cout << numm << passs<<endl;
+	//del(num, nu,2);
+	//del(password, pass,6);
+	/*for (int i = 0; i < 2; i++) { cout << num[i]; }
+	cout << endl;
+	for (int i = 0; i < 6; i++) { cout << password[i]; }*/
 	char n='a';
+	
+	
+	int fir, seco;
+	fir = (int)first;
+	seco = (int)seco;
 	int a1=send(sock, &n, sizeof(n), 0);
-	int a2 = send(sock, num, 2, 0) ;
-	//cout << strlen(num) << endl;
-	int a3 = send(sock, password, 6, 0);
-	//cout << strlen(password) << endl;
-	cout << a1 << "  " << a2 << "  " << a3 << endl;
+	send(sock, &first, sizeof(first), 0);
+	int a2 = send(sock, num, fir, 0) ;
+	send(sock, &second, sizeof(second), 0);
+	int a3 = send(sock, password, seco, 0);
+
+	//cout << a1 << "  " << a2 << "  " << a3 << endl;
 	char resbuf = { };
 	int a4 = recv(sock, &resbuf, 1, 0) ;
-	cout << a4<<endl;
+	//cout << a4<<endl;
 	
-
-	
-	/*int res;
-	 res = (int)resbuf;*/
-	
-
 	if (resbuf !='n') {
 		//页面跳转
 		strEDIT3 = "登录成功！";
 		SetDlgItemText(IDC_STATIC, strEDIT3);
 
 		CDialog::OnOK();
-		//CDialogEx::OnOK();hgg
 		Student_2 Dlg3;           // 模态构造对话框类CTipDlg的实例   
 		Dlg3.DoModal();
 	}

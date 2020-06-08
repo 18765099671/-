@@ -30,3 +30,5 @@ public:
 };
 
 extern CMFCApplication1App theApp;
+
+string _UnicodeToUtf8(CString Unicodestr);
