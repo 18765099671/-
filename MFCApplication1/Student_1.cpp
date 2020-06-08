@@ -50,13 +50,14 @@ void Student_1::OnBnClickedOk()
 	
 	char *num = (LPSTR)(LPCTSTR)strEDIT1;
 	char *password = (LPSTR)(LPCTSTR)strEDIT2;
-
+	char n[5] ;
 	/*long long tnum;
 	int tpassword;*/
 	/*ifstream in("account_s.txt");
 	in >> tnum;
 	in >> tpassword;*/
-	
+	n[0] = 1;
+	if (send(sock, n, strlen(n), 0) == -1) exit(0);
 	if (send(sock, num, strlen(num), 0) == -1) exit(0);
 	if(send(sock, password, strlen(password), 0)==-1) exit(0);
 	char resbuf[5] = {};
