@@ -9,7 +9,8 @@
 #endif
 
 #include "resource.h"		// 主符号
-
+#include<iostream>
+using namespace std;
 SOCKET Socket_create();
 // CMFCApplication1App:
 // 有关此类的实现，请参阅 MFCApplication1.cpp
@@ -32,3 +33,31 @@ public:
 extern CMFCApplication1App theApp;
 
 string _UnicodeToUtf8(CString Unicodestr);
+
+struct projectData
+{
+    int number;
+    string name;
+    int type;
+    string startTime;
+    string endTime;
+    string description;
+    string creator;
+};
+
+struct userData
+{
+    string name;
+    string password;
+    int type;
+    string leader;
+};
+
+struct data
+{
+    int number;
+    string user;
+    int project;
+    string time;
+    int state;
+};

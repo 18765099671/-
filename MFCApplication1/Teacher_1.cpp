@@ -39,7 +39,7 @@ END_MESSAGE_MAP()
 #include<fstream>
 #include <WinSock2.h>
 #include <windows.h>
- SOCKET sock;
+extern SOCKET sock;
 extern CString strEDIT3;
 using namespace std;
 void Teacher_1::OnBnClickedOk()
@@ -64,7 +64,7 @@ void Teacher_1::OnBnClickedOk()
 	char n = 'a';
 
 
-	int fir, seco;
+	int fir=0, seco=0;
 	fir = (int)first;
 	seco = (int)seco;
 	int a1 = send(sock, &n, sizeof(n), 0);

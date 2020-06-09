@@ -64,7 +64,8 @@ void Student_1::OnBnClickedOk()
 	char second=passs.length();
 	const char*  num = numm.c_str();
 	const char* password = passs.c_str();
-	cout << numm << passs<<endl;
+	cout << numm << "  " << passs<<endl;
+	//cout << first << "  " <<second << endl;
 	//del(num, nu,2);
 	//del(password, pass,6);
 	/*for (int i = 0; i < 2; i++) { cout << num[i]; }
@@ -73,20 +74,21 @@ void Student_1::OnBnClickedOk()
 	char n='a';
 	
 	
-	int fir, seco;
+	int fir=0, seco=0;
 	fir = (int)first;
-	seco = (int)seco;
+	seco = (int)second;
+	cout << fir << seco<<endl;
 	int a1=send(sock, &n, sizeof(n), 0);
 	send(sock, &first, sizeof(first), 0);
 	int a2 = send(sock, num, fir, 0) ;
 	send(sock, &second, sizeof(second), 0);
 	int a3 = send(sock, password, seco, 0);
 
-	//cout << a1 << "  " << a2 << "  " << a3 << endl;
+	cout << a1 << "  " << a2 << "  " << a3 << endl;
 	char resbuf = { };
 	int a4 = recv(sock, &resbuf, 1, 0) ;
-	//cout << a4<<endl;
-	
+	cout << a4<<endl;
+	cout << resbuf;
 	if (resbuf !='n') {
 		//页面跳转
 		strEDIT3 = "登录成功！";

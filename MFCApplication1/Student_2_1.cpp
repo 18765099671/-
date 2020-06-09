@@ -44,7 +44,7 @@ void Student_2_1::OnBnClickedButton1()
 	Student_2_1_1 Dlg3;           // 模态构造对话框类CTipDlg的实例   
 	Dlg3.DoModal();
 }
-
+#include<iostream>
 #include <WinSock2.h>
 #include <windows.h>
 #include<string>
@@ -56,42 +56,65 @@ void Student_2_1::OnBnClickedButton2()
 
 	CString strEDIT1, strEDIT2, strEDIT3;
 	GetDlgItem(Name)->GetWindowText(strEDIT1);
-	char* name = (LPSTR)(LPCTSTR)strEDIT1;
-	char n = b;
-	int a1 = send(sock, &n, strlen(&n), 0);
-	send(sock, name, strlen(name), 0);
-	char number[10] = {};
-	char nam[10] = {};
-	char type[10] = {};
-	char start_time[10] = {};
-	char end_time[10] = {};
-	char creater[10] = {};
-	recv(sock, number, 10, 0);
-	recv(sock, nam, 10, 0);
-	recv(sock, type, 10, 0);
-	recv(sock, start_time, 10, 0);
-	recv(sock, end_time, 10, 0);
-	recv(sock, creater, 10, 0);
-	string line=line ;
-	string num=number;
-	string na=nam;
-	string ty=type ;
-	string start_ti =start_time;
-	string end_ti =end_time;
-	string creat =creater;
-	CString* strEDIT = new CString[100];
-	
+	string nam = _UnicodeToUtf8(strEDIT1);
 
-		line = " " + num + " " + na + " " +ty + " " + start_ti + " " + end_ti + "  "+ creat+"\n";
+	char first = nam.length();
+	const char* name = nam.c_str();
+	//char* name = (LPSTR)(LPCTSTR)strEDIT1;
+
+	char n = 'b';
+	int a1 = send(sock, &n, sizeof(n), 0);
+	cout <<endl<<"a1=" <<a1<<endl;
+
+	int fir = 0;
+	fir = (int)first;
+	cout << "number=" << fir << endl;
+	int a2 = send(sock, &first, 1, 0);
+	int a3=send(sock, name, fir, 0);
+	cout << endl << "a2=" << a2 << endl << "a3=" << a3 << endl;
+	int sec = 0;
+	char second;
+	char resbuf = { };
+	int a4 = recv(sock, &resbuf, 1, 0);
+
+	cout << "a4=" << a4 << endl <<"chioce="<<resbuf<< endl;
+	if (resbuf != 'n') 
+	{
+		int a5=recv(sock, &second, sizeof(second), 0);
+		cout << "a5=" << a5 << endl;
+		sec = (int)second;
+		cout << "sec:"<<sec << endl;
+		char* result = new char[sec];
+		int a6=recv(sock, result, sec, 0);
+		cout << "a6=" << a6 << endl;
+		cout << result;
+
+		projectData* newproject;
+		newproject = (projectData*)result;
 
 
-	
-
-	CString str;
-	
-		str += line.c_str();;
-	
-
-	SetDlgItemText(IDC_STATIC1, str);
+		/*recv(sock, number, 10, 0);
+		recv(sock, na, 10, 0);
+		recv(sock, type, 10, 0);
+		recv(sock, start_time, 10, 0);
+		recv(sock, end_time, 10, 0);
+		recv(sock, creater, 10, 0);*/
+		string line;
+		int nn = newproject->number;
+		int tty = newproject->type;
+		string num = to_string(nn);//newproject->number;
+		//string na = newproject->name;
+		string ty = to_string(tty);//newproject->type;
+		string start_ti = newproject->startTime;
+		string end_ti = newproject->endTime;
+		string creat = newproject->creator;
+		string des = newproject->description;
+		/*CString* strEDIT = new CString[100];*/
+		line = " " + num /*+ " " + na*/ + " " + ty + " " + start_ti + " " + end_ti + "  " + creat  +" " + des + " " + "\n";
+		cout << line;
+		CString str;
+		str = line.c_str();
+		SetDlgItemText(IDC_STATIC1, str);
+	}
 
 }
