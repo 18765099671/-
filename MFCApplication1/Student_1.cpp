@@ -51,6 +51,9 @@ using namespace std;
 //	}
 //
 //}
+char first;
+string numm_1;
+int fir;
 void Student_1::OnBnClickedOk()
 {
 	CString strEDIT1, strEDIT2, strEDIT3;
@@ -60,10 +63,13 @@ void Student_1::OnBnClickedOk()
 	GetDlgItem(PASSWORD)->GetWindowText(strEDIT2);
 	string numm=_UnicodeToUtf8(strEDIT1);
 	string passs = _UnicodeToUtf8(strEDIT2);
-	char first=numm.length();
+	numm_1 = numm;
+	 first=numm.length();
 	char second=passs.length();
 	const char*  num = numm.c_str();
+	
 	const char* password = passs.c_str();
+
 	cout << numm << "  " << passs<<endl;
 	//cout << first << "  " <<second << endl;
 	//del(num, nu,2);
@@ -74,21 +80,23 @@ void Student_1::OnBnClickedOk()
 	char n='a';
 	
 	
-	int fir=0, seco=0;
-	fir = (int)first;
+	int seco=0;
+	 fir = (int)first;
 	seco = (int)second;
-	cout << fir << seco<<endl;
+	//cout << fir << seco<<endl;
 	int a1=send(sock, &n, sizeof(n), 0);
-	send(sock, &first, sizeof(first), 0);
-	int a2 = send(sock, num, fir, 0) ;
+
+	send(sock, &first, sizeof(first), 0); //传用户名大小
+		int a2 = send(sock, num, fir, 0) ;//传数据
+
 	send(sock, &second, sizeof(second), 0);
 	int a3 = send(sock, password, seco, 0);
 
-	cout << a1 << "  " << a2 << "  " << a3 << endl;
+	//cout << a1 << "  " << a2 << "  " << a3 << endl;
 	char resbuf = { };
 	int a4 = recv(sock, &resbuf, 1, 0) ;
-	cout << a4<<endl;
-	cout << resbuf;
+	//cout << a4<<endl;
+	//cout << resbuf;
 	if (resbuf !='n') {
 		//页面跳转
 		strEDIT3 = "登录成功！";
@@ -114,5 +122,8 @@ void Student_1::OnBnClickedOk()
 void Student_1::OnBnClickedCancel()
 {
 	// TODO: 在此添加控件通知处理程序代码
+	char n = 'q';
+	int a1 = send(sock, &n, sizeof(n), 0);
+	cout << "返回"<<endl;
 	CDialog::OnCancel();
 }

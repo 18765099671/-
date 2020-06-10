@@ -43,25 +43,34 @@ void Teacher_2_2::OnBnClickedOk()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	//CDialog::OnOK();、
-	CString strEDIT1, strEDIT2, strEDIT3, strEDIT4, strEDIT5;
+	CString strEDIT1, strEDIT2, strEDIT3, strEDIT4, strEDIT5, strEDIT6;
 	GetDlgItem(a)->GetWindowText(strEDIT1);
 	GetDlgItem(b)->GetWindowText(strEDIT2);
 	GetDlgItem(c)->GetWindowText(strEDIT3);
 	GetDlgItem(d)->GetWindowText(strEDIT4);
 	GetDlgItem(e)->GetWindowText(strEDIT5);
+	GetDlgItem(f)->GetWindowText(strEDIT6);
 	string aa = _UnicodeToUtf8(strEDIT1);
 	string bb = _UnicodeToUtf8(strEDIT2);
 	string cc = _UnicodeToUtf8(strEDIT3);
 	string dd = _UnicodeToUtf8(strEDIT4);
 	string ee = _UnicodeToUtf8(strEDIT5);
+	string ff = _UnicodeToUtf8(strEDIT5);
+
+	char al = aa.length();
+	char bl = atoi(bb.c_str());
+	char cl = cc.length();
+	char dl = dd.length();
+	char el = ee.length();
+	char fl = atoi(ff.c_str());
 
 	const char* name = aa.c_str();
-	const char* type = bb.c_str();
+	//const char* type = bb.c_str();
 	const char* s_time = cc.c_str();
 	const char* e_time = dd.c_str();
 	const char* reason = ee.c_str();
-
-	char n = 'e';
+	
+	char n = 'h';
 	int a1 = send(sock, &n, sizeof(n), 0);
 	cout << endl << "a1=" << a1 << endl;
 	//projectData* newproject;
@@ -73,9 +82,24 @@ void Teacher_2_2::OnBnClickedOk()
 	// newproject->creator= reason;
 	/*char n = 7;
 	int a1 = send(sock, &n, strlen(&n), 0);*/
-	send(sock, name, strlen(name), 0);
-	send(sock, type, strlen(name), 0);
-	send(sock, s_time, strlen(name), 0);
-	send(sock, e_time, strlen(name), 0);
-	send(sock, reason, strlen(name), 0);
+	send(sock, &fl, sizeof(fl), 0);
+	/*string chioce= Receive();
+	if (chioce != 'n') {*/
+		send(sock, &al, sizeof(al), 0);
+		send(sock, name, (int)al, 0);
+
+		send(sock, &bl, sizeof(bl), 0);
+
+		send(sock, &cl, sizeof(cl), 0);
+		send(sock, s_time, (int)cl, 0);
+
+		send(sock, &dl, sizeof(dl), 0);
+		send(sock, e_time, (int)dl, 0);
+
+		send(sock, &el, sizeof(el), 0);
+		send(sock, reason, (int)el, 0);
+		CString str;
+		str = "项目创建成功！";
+		SetDlgItemText(IDC_STATIC1, str);
+	/*}*/
 }

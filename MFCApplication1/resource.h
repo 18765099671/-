@@ -38,12 +38,18 @@
 #define IDC_EDIT7                       1010
 #define IDC_STATIC1                     1010
 #define Name                            1011
+#define IDC_STATIC6                     1011
 #define a                               1012
 #define b                               1013
+#define IDC_STATIC7                     1013
 #define c                               1014
+#define IDC_STATIC8                     1014
 #define d                               1015
+#define IDC_STATIC9                     1015
 #define e                               1016
 #define IDC_STATIC4                     1017
+#define d2                              1017
+#define f                               1017
 #define IDC_STATIC5                     1018
 #define Num                             1019
 
@@ -51,7 +57,7 @@
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        154
+#define _APS_NEXT_RESOURCE_VALUE        155
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1020
 #define _APS_NEXT_SYMED_VALUE           101

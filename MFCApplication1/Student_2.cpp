@@ -34,6 +34,7 @@ BEGIN_MESSAGE_MAP(Student_2, CDialog)
 	ON_BN_CLICKED(IDC_BUTTON4, &Student_2::OnBnClickedButton4)
 	ON_BN_CLICKED(IDC_BUTTON2, &Student_2::OnBnClickedButton2)
 	ON_BN_CLICKED(IDC_BUTTON3, &Student_2::OnBnClickedButton3)
+	ON_BN_CLICKED(IDCANCEL, &Student_2::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
 
@@ -81,4 +82,15 @@ void Student_2::OnBnClickedButton3()
 	Student_2_3 Dlg3;           // 模态构造对话框类CTipDlg的实例   
 	Dlg3.DoModal();
 	this->ShowWindow(SW_SHOW);
+}
+
+extern SOCKET sock;
+void Student_2::OnBnClickedCancel()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	char n = 'q';
+	int a1 = send(sock, &n, sizeof(n), 0);
+	cout << "返回" << endl;
+	CDialog::OnCancel();
+	//CDialog::OnCancel();
 }

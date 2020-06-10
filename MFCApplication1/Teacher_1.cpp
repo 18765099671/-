@@ -30,6 +30,7 @@ void Teacher_1::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(Teacher_1, CDialog)
 	ON_BN_CLICKED(IDOK, &Teacher_1::OnBnClickedOk)
+	ON_BN_CLICKED(IDCANCEL, &Teacher_1::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
 
@@ -66,24 +67,23 @@ void Teacher_1::OnBnClickedOk()
 
 	int fir=0, seco=0;
 	fir = (int)first;
-	seco = (int)seco;
+	seco = (int)second;
 	int a1 = send(sock, &n, sizeof(n), 0);
 	send(sock, &first, sizeof(first), 0);
 	int a2 = send(sock, num, fir, 0);
 	send(sock, &second, sizeof(second), 0);
 	int a3 = send(sock, password, seco, 0);
 
-	//cout << a1 << "  " << a2 << "  " << a3 << endl;
+	cout << a1 << "  " << a2 << "  " << a3 << endl;
 	char resbuf = { };
 	int a4 = recv(sock, &resbuf, 1, 0);
-	//cout << a4<<endl;
+	cout << a4<<endl;
 
 	if (resbuf != 'n') {
 		//页面跳转
-		strEDIT3 = "登录成功！";
-		SetDlgItemText(IDC_STATIC, strEDIT3);
-
-		CDialog::OnOK();
+		//strEDIT3 = "登录成功！";
+		//SetDlgItemText(IDC_STATIC, strEDIT3);
+			CDialog::OnOK();
 		Teacher_2 Dlg3;           // 模态构造对话框类CTipDlg的实例   
 		Dlg3.DoModal();
 	}
@@ -98,3 +98,15 @@ void Teacher_1::OnBnClickedOk()
 }
 
 
+
+
+void Teacher_1::OnBnClickedCancel()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	
+	char n = 'q';
+	int a1 = send(sock, &n, sizeof(n), 0);
+	cout << "返回" << endl;
+	CDialog::OnCancel();
+	CDialog::OnCancel();
+}

@@ -152,4 +152,40 @@ BOOL CMFCApplication1App::InitInstance()
 	//  而不是启动应用程序的消息泵。
 	return FALSE;
 }
+extern SOCKET sock;
+#include<stdio.h>
+string Receive()
+{
+	int sec = 0;
+	char second;
+	int a1 = recv(sock, &second, sizeof(second), 0);
+	sec = (int)second;
+	cout << "数字返回值：" << a1 << "   数字：" << sec << endl;
+	char* result = new char [sec];
+	memset(result,0, strlen(result));
+	cout << strlen(result)<<endl;
+	int a2 = recv(sock, result, sec, 0);
+	string re = result;
+	delete[]result;
+	re.substr(0, sec-1);
+	
+	cout << "解后大小" <<re.length()<< endl;
+	//const char*  resul = re.c_str();
+	fflush(stdout);
+	cout << "数据返回值：" << a2 << "   数据：" <<re<< endl;
+	return re;
 
+};
+int Receive_number()
+{
+	int sec = 0;
+	char second;
+	int a1 = recv(sock, &second, sizeof(second), 0);
+	sec = (int)second;
+	cout << "数字返回值：" << a1 << "   数字：" << sec << endl;
+	/*char* result = new char[sec];
+	int a2 = recv(sock, result, sec, 0);
+	cout << "数据返回值：" << a2 << "数据：" << result << endl;*/
+	return sec;
+
+};

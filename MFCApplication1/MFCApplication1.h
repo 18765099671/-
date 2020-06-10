@@ -61,3 +61,5 @@ struct data
     string time;
     int state;
 };
+string Receive();
+int Receive_number();
