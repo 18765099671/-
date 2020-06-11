@@ -96,7 +96,7 @@ void Student_2_4::OnBnClickedOk()
 	string cc = _UnicodeToUtf8(strEDIT3);
 	string dd = _UnicodeToUtf8(strEDIT4);
 	string ee = _UnicodeToUtf8(strEDIT5);
-	string ff = _UnicodeToUtf8(strEDIT5);
+	string ff = _UnicodeToUtf8(strEDIT6);
 
 	char al = aa.length();
 	char bl = atoi(bb.c_str());
@@ -111,7 +111,7 @@ void Student_2_4::OnBnClickedOk()
 	const char* e_time = dd.c_str();
 	const char* reason = ee.c_str();
 
-	char n = 'h';//要改
+	char n = 'j';//要改
 	int a1 = send(sock, &n, sizeof(n), 0);
 	cout << endl << "a1=" << a1 << endl;
 	//projectData* newproject;
@@ -139,7 +139,20 @@ void Student_2_4::OnBnClickedOk()
 
 	send(sock, &el, sizeof(el), 0);
 	send(sock, reason, (int)el, 0);
-	CString str;
-	str = "项目修改成功！";
-	SetDlgItemText(IDC_STATIC1, str);
+
+	char resbuf = { };
+	int a4 = recv(sock, &resbuf, 1, 0);
+	cout << "a4=" << a4 << endl << "chioce=" << resbuf << endl;
+
+	if (resbuf != 'n')
+	{
+		CString str;
+		str = "项目修改成功！";
+		SetDlgItemText(IDC_STATIC1, str);
+	}
+	else {
+		CString str2;
+		str2 = "项目修改失败！";
+		SetDlgItemText(IDC_STATIC1, str2);
+	}
 }

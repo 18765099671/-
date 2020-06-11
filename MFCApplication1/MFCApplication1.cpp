@@ -58,7 +58,7 @@ SOCKET Socket_create() {
 		//2、连接服务器，绑定网络端口
 	sockaddr_in sin = {};
 	sin.sin_family = AF_INET;								//ipv4
-	sin.sin_port = htons(24869);								//host to net  unsigned short   服务器端口号
+	sin.sin_port = htons(12345);								//host to net  unsigned short   服务器端口号
 	sin.sin_addr.S_un.S_addr = inet_addr("106.13.89.47");		//服务器地址;
 	iRet = connect(sock, (sockaddr*)&sin, sizeof(sockaddr_in));
 	if (iRet == SOCKET_ERROR)

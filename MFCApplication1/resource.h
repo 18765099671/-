@@ -46,12 +46,15 @@
 #define IDC_STATIC8                     1014
 #define d                               1015
 #define IDC_STATIC9                     1015
+#define b2                              1015
 #define e                               1016
 #define IDC_STATIC4                     1017
 #define d2                              1017
 #define f                               1017
 #define IDC_STATIC5                     1018
 #define Num                             1019
+#define IDC_STATIC10                    1020
+#define Num2                            1021
 
 // Next default values for new objects
 // 

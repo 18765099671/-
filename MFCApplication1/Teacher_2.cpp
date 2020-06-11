@@ -33,6 +33,7 @@ BEGIN_MESSAGE_MAP(Teacher_2, CDialog)
 	ON_BN_CLICKED(IDCANCEL, &Teacher_2::OnBnClickedCancel)
 	ON_BN_CLICKED(IDC_BUTTON3, &Teacher_2::OnBnClickedButton3)
 	ON_BN_CLICKED(IDC_BUTTON6, &Teacher_2::OnBnClickedButton6)
+	ON_BN_CLICKED(IDC_BUTTON5, &Teacher_2::OnBnClickedButton5)
 END_MESSAGE_MAP()
 
 
@@ -83,6 +84,17 @@ void Teacher_2::OnBnClickedButton3()
 
 
 void Teacher_2::OnBnClickedButton6()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	this->ShowWindow(SW_HIDE);
+	Student_2_3 Dlg3;           // 模态构造对话框类CTipDlg的实例   
+	Dlg3.DoModal();
+	this->ShowWindow(SW_SHOW);
+	
+}
+
+
+void Teacher_2::OnBnClickedButton5()
 {
 	// TODO: 在此添加控件通知处理程序代码
 	this->ShowWindow(SW_HIDE);

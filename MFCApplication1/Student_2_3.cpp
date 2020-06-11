@@ -41,40 +41,69 @@ using namespace std;
 extern SOCKET sock;
 void Student_2_3::OnBnClickedButton1()
 {
-	// TODO: 在此添加控件通知处理程序代码
 	CString strEDIT1, strEDIT2, strEDIT3;
-	/*GetDlgItem(Name)->GetWindowText(strEDIT1);
-	char* name = (LPSTR)(LPCTSTR)strEDIT1;
-	send(sock, name, strlen(name), 0);*/
-	//char number[10] = {};
-	char nam[10] = {};
-	/*char type[10] = {};
-	char start_time[10] = {};*/
-	char reason[10] = {};
-	char state[10] = {};
-	//recv(sock, number, 10, 0);
-	recv(sock, nam, 10, 0);
-	//recv(sock, type, 10, 0);
-	//recv(sock, start_time, 10, 0);
-	recv(sock, reason, 10, 0);
-	recv(sock, state, 10, 0);
-	string line = line;
-	//string num = number;
-	string na = nam;
-	/*string ty = type;
-	string start_ti = start_time;*/
-	string reaso = reason;
-	string stat = state;
-	CString* strEDIT = new CString[100];
+	GetDlgItem(Num)->GetWindowText(strEDIT1);
+	string numb = _UnicodeToUtf8(strEDIT1);
+	char lenth1 = numb.length();
+	char number = atoi(numb.c_str());
+	int len1 = (int)lenth1;
+	char n = 'i';//修改
+	//const char* num = numm_1.c_str();
+	int a1 = send(sock, &n, sizeof(n), 0);
+	cout << a1 << endl;
+
+	int a3 = send(sock, &number, len1, 0);//传数据
+	cout << a3 << endl;
+
+	cout << "用户名" << number << "  " << numb << "大小" << len1 << endl;
+
+	char resbuf = { };
+	int a4 = recv(sock, &resbuf, 1, 0);
+	cout << "a4=" << a4 << endl << "chioce=" << resbuf << endl;
+	if (resbuf != 'n') {
+		CString str;
+		str = "项目删除成功！";
+		SetDlgItemText(IDC_STATIC1, str);
+	}
+	else{
+		CString str2;
+		str2 = "项目删除失败！";
+		SetDlgItemText(IDC_STATIC1, str2);
+	}
+	// TODO: 在此添加控件通知处理程序代码
+	//CString strEDIT1, strEDIT2, strEDIT3;
+	///*GetDlgItem(Name)->GetWindowText(strEDIT1);
+	//char* name = (LPSTR)(LPCTSTR)strEDIT1;
+	//send(sock, name, strlen(name), 0);*/
+	////char number[10] = {};
+	//char nam[10] = {};
+	///*char type[10] = {};
+	//char start_time[10] = {};*/
+	//char reason[10] = {};
+	//char state[10] = {};
+	////recv(sock, number, 10, 0);
+	//recv(sock, nam, 10, 0);
+	////recv(sock, type, 10, 0);
+	////recv(sock, start_time, 10, 0);
+	//recv(sock, reason, 10, 0);
+	//recv(sock, state, 10, 0);
+	//string line = line;
+	////string num = number;
+	//string na = nam;
+	///*string ty = type;
+	//string start_ti = start_time;*/
+	//string reaso = reason;
+	//string stat = state;
+	//CString* strEDIT = new CString[100];
 
 
-	line = " " + na + " " + stat + " " + reason + "\n";
+	//line = " " + na + " " + stat + " " + reason + "\n";
 
 
 
 
-	CString str;
+	//CString str;
 
-	str += line.c_str();;
-	SetDlgItemText(IDC_STATIC1, str);
+	//str += line.c_str();;
+	//SetDlgItemText(IDC_STATIC1, str);
 }

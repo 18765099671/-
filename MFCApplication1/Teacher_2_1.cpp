@@ -32,6 +32,7 @@ BEGIN_MESSAGE_MAP(Teacher_2_1, CDialog)
 	ON_BN_CLICKED(IDOK, &Teacher_2_1::OnBnClickedOk)
 	ON_BN_CLICKED(IDC_BUTTON1, &Teacher_2_1::OnBnClickedButton1)
 	//ON_STN_CLICKED(IDC_STATIC5, &Teacher_2_1::OnStnClickedStatic5)
+	ON_BN_CLICKED(IDC_BUTTON2, &Teacher_2_1::OnBnClickedButton2)
 END_MESSAGE_MAP()
 
 
@@ -149,3 +150,26 @@ void Teacher_2_1::OnBnClickedButton1()
 
 
 
+int user_type;
+#include "Teacher_2_1_1.h"
+void Teacher_2_1::OnBnClickedButton2()
+{
+	// TODO: 在此添加控件通知处理程序代码
+	char n = 'p';
+	int a1 = send(sock, &n, sizeof(n), 0);
+	user_type = Receive_number();
+
+	CString strEDIT1, strEDIT2, strEDIT3;
+	GetDlgItem(Num2)->GetWindowText(strEDIT1);
+	string numb = _UnicodeToUtf8(strEDIT1);
+	char lenth1 = numb.length();
+	char number = atoi(numb.c_str());
+	int len1 = (int)lenth1;
+	int a3 = send(sock, &number, len1, 0);//传数据
+
+
+	this->ShowWindow(SW_HIDE);
+	Teacher_2_1_1 Dlg3;           // 模态构造对话框类CTipDlg的实例   
+	Dlg3.DoModal();
+	this->ShowWindow(SW_SHOW);
+}

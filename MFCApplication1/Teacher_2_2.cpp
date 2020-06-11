@@ -55,7 +55,7 @@ void Teacher_2_2::OnBnClickedOk()
 	string cc = _UnicodeToUtf8(strEDIT3);
 	string dd = _UnicodeToUtf8(strEDIT4);
 	string ee = _UnicodeToUtf8(strEDIT5);
-	string ff = _UnicodeToUtf8(strEDIT5);
+	string ff = _UnicodeToUtf8(strEDIT6);
 
 	char al = aa.length();
 	char bl = atoi(bb.c_str());
@@ -72,7 +72,7 @@ void Teacher_2_2::OnBnClickedOk()
 	
 	char n = 'h';
 	int a1 = send(sock, &n, sizeof(n), 0);
-	cout << endl << "a1=" << a1 << endl;
+	//cout << endl << "a1=" << a1 << endl;
 	//projectData* newproject;
 	////newproject.
 	//int tty = (int)type;
@@ -82,9 +82,12 @@ void Teacher_2_2::OnBnClickedOk()
 	// newproject->creator= reason;
 	/*char n = 7;
 	int a1 = send(sock, &n, strlen(&n), 0);*/
-	send(sock, &fl, sizeof(fl), 0);
-	/*string chioce= Receive();
-	if (chioce != 'n') {*/
+	
+	int a2=send(sock, &fl, sizeof(fl), 0);
+	cout << "a2="<<a2 << "num1=" <<fl << "num2=" <<(int)fl<< "size=" << sizeof(fl)<<endl;
+
+	
+	/*if (chioce1 != 'n') {*/
 		send(sock, &al, sizeof(al), 0);
 		send(sock, name, (int)al, 0);
 
@@ -98,8 +101,20 @@ void Teacher_2_2::OnBnClickedOk()
 
 		send(sock, &el, sizeof(el), 0);
 		send(sock, reason, (int)el, 0);
+
+		char resbuf = { };
+		int a4 = recv(sock, &resbuf, 1, 0);
+		cout << "a4=" << a4 << endl << "chioce=" << resbuf << endl;
+
+		if (resbuf != 'n') 
+		{
 		CString str;
 		str = "项目创建成功！";
 		SetDlgItemText(IDC_STATIC1, str);
-	/*}*/
+	}
+	else {
+		CString str2;
+		str2 = "项目创建失败！";
+		SetDlgItemText(IDC_STATIC1, str2);
+	}
 }
